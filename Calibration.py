@@ -201,11 +201,10 @@ class CalibatorEvaluation():
         ax : Matplotlib axis object
 
         '''
-        ax = reliability_base(self, n_iter=n_iter, use_train=use_train, ax=ax, 
-                              colors=colors, tight_layout=tight_layout, 
-                              calibrate_kwds=calibrate_kwds, 
-                              estimate_kwds=estimate_kwds)
-        return ax
+        return reliability_base(self, n_iter=n_iter, use_train=use_train, 
+                                ax=ax, colors=colors, tight_layout=tight_layout, 
+                                calibrate_kwds=calibrate_kwds, 
+                                estimate_kwds=estimate_kwds)
     
     def plotting_metric(self, metric="gini", ax=None, colors=None, 
                         tight_layout=True, plot_kwds=None):
@@ -238,9 +237,8 @@ class CalibatorEvaluation():
         ax : Matplotlib axis object
 
         '''
-        ax = metric_base(self, metric=metric, ax=ax, colors=colors, 
-                         tight_layout=tight_layout, plot_kwds=plot_kwds)
-        return ax
+        return metric_base(self, metric=metric, ax=ax, colors=colors, 
+                           tight_layout=tight_layout, plot_kwds=plot_kwds)
 
 def metric_base(calibrator, metric="gini", ax=None, colors=None, 
                 tight_layout=True, plot_kwds=None):
@@ -536,9 +534,14 @@ def reliability_base(calibrator, n_iter=0, use_train=True, ax=None,
                 markersize=5)
     if estimate_kwds is not None: kwds.update(estimate_kwds)
     kwds.update(dict(color=colors[1], label='Mean estimates'))
-    ax.plot(p_targets, mean_pred, **kwds)
-    lower, upper = mean_pred-stdv_pred, mean_pred+stdv_pred
-    ax.fill_between(p_targets, lower, upper, alpha=0.1, 
+    ax.plot(mean_pred, p_targets, **kwds)
+    
+    
+    
+    
+    
+    lower, upper = p_targets-stdv_pred, p_targets+stdv_pred
+    ax.fill_between(mean_pred, lower, upper, alpha=0.1, 
                     color=colors[1], label="Standard deviation")
     # =============================================================
  
