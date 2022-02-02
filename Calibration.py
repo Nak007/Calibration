@@ -559,6 +559,11 @@ def reliability_base(calibrator, n_iter=0, use_train=True, ax=None,
     ax.set_facecolor('white')
     ax.patch.set_alpha(0)
     # -------------------------------------------------------------
+    bottom, top = ax.get_ylim()
+    left, right = ax.get_xlim()
+    ax.set_xlim(left, max(top, right))
+    ax.set_ylim(bottom, max(top, right))
+    # -------------------------------------------------------------
     error = "R2={:.4f}, Gini={:.4f}, Bins={:,d}"
     bottom, top = ax.get_ylim()
     left, right = ax.get_xlim()
