@@ -527,7 +527,8 @@ def reliability_base(calibrator, n_iter=0, use_train=True, ax=None,
     kwds = dict(linewidth=2, linestyle="-.")
     if calibrate_kwds is not None: kwds.update(calibrate_kwds)
     kwds.update(dict(color=colors[0],label='Perfectly calibrated'))
-    ax.plot(p_targets, p_targets, **kwds)
+    ax.axline((0, 0), slope=1, **kwds)
+    #ax.plot(p_targets, p_targets, **kwds)
     # -------------------------------------------------------------
     # Calibrated line.
     kwds = dict(linewidth=1, marker="s", fillstyle="none", 
@@ -535,11 +536,6 @@ def reliability_base(calibrator, n_iter=0, use_train=True, ax=None,
     if estimate_kwds is not None: kwds.update(estimate_kwds)
     kwds.update(dict(color=colors[1], label='Mean estimates'))
     ax.plot(mean_pred, p_targets, **kwds)
-    
-    
-    
-    
-    
     lower, upper = p_targets-stdv_pred, p_targets+stdv_pred
     ax.fill_between(mean_pred, lower, upper, alpha=0.1, 
                     color=colors[1], label="Standard deviation")
