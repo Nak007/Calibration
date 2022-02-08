@@ -442,7 +442,8 @@ def histogram_base(calibrator, n_iter=0, use_train=True, ax=None,
                     for n,p in zip(x+1, p_samples)]
     xticklabels += [label.split('\n')[0] for label in xticklabels]
     xtick_pos = (list(x) + list(x+1e-8))
-    plt.xticks(xtick_pos, xticklabels, fontsize=12)
+    ax.set_xticks(xtick_pos)
+    ax.set_xticklabels(xticklabels, fontsize=12)
     # ---------------------------------------------------------------
     # color the y tick labels that have the feature values as gray
     # (these fall behind the black ones with just the feature name)
